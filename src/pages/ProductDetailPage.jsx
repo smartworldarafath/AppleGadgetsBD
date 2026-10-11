@@ -91,26 +91,30 @@ export default function ProductDetailPage() {
   const brandLogo = brandLogos[product.brand] || brandLogos.iphone;
 
   // Build specifications list matching live website structure
-  const specsData = [
-    { label: 'Brand', value: product.brandName || 'Apple' },
-    { label: 'Platform', value: product.specs?.processor ? `OS: ${product.specs.os || 'Latest OS'}, Chipset: ${product.specs.processor}` : 'Apple A20 Pro (2nm) Hexa-core' },
-    { label: 'Model', value: product.name },
-    { label: 'Network', value: product.specs?.network || 'GSM, HSPA, LTE, 5G' },
-    { label: 'Dimensions', value: product.specs?.dimensions || '163.4 x 78 x 8.75 mm' },
-    { label: 'Weight', value: product.specs?.weight || '249 g' },
-    { label: 'SIM', value: selectedRegion || 'Dual SIM (nano-SIM & eSIM) | Dual eSIM' },
-    { label: 'Display Type', value: product.specs?.display || 'LTPO Super Retina XDR OLED, 120Hz, HDR10, Dolby Vision' },
-    { label: 'Display Size', value: product.specs?.displaySize || '6.9 inches' },
-    { label: 'Display Resolution', value: product.specs?.displayResolution || '1320 × 2868 pixels, ~460 ppi' },
-    { label: 'Memory', value: `${selectedStorage?.label || '256GB'} / 12GB RAM` },
-    { label: 'Main Camera', value: product.specs?.camera || '48MP Wide Fusion camera with Variable Aperture, 48MP Periscope Telephoto, 48MP Ultra Wide | Video: 4K@24/25/30/60/100/120fps' },
-    { label: 'Selfie Camera', value: product.specs?.selfieCamera || '18MP Ultra Wide | Video: 4K@24/25/30/60fps | Features: ProRes RAW, Dolby Vision HDR' },
-    { label: 'Sound', value: 'Stereo Loudspeakers' },
-    { label: 'Battery Info', value: product.specs?.battery || 'Typical use: Up to 30 hours | Video playback: Up to 45 hours | 60W Capable Fast Charging' },
-    { label: 'Connectivity', value: 'Wi-Fi 7, Bluetooth: 6.0, NFC: Yes' },
-    { label: 'Sensors', value: 'Face ID | LiDAR Scanner | Barometer | High-dynamic-range gyro | High-g accelerometer | Proximity sensor | Dual ambient light sensors' },
-    { label: 'Other Features / Info', value: product.specs?.waterproof || 'Ceramic Shield 2, IP68 Water Resistance, Face ID, Ultra Wideband (Gen 2)' },
-  ];
+  const rawSpecs = (product.specsTable && product.specsTable.length > 0)
+    ? product.specsTable.map(s => ({ label: s.key, value: s.value }))
+    : [
+        { label: 'Brand', value: product.brandName || 'Apple' },
+        { label: 'Platform', value: product.specs?.processor ? `OS: ${product.specs.os || 'Latest OS'}, Chipset: ${product.specs.processor}` : 'Apple A20 Pro (2nm) Hexa-core' },
+        { label: 'Model', value: product.name },
+        { label: 'Network', value: product.specs?.network || 'GSM, HSPA, LTE, 5G' },
+        { label: 'Dimensions', value: product.specs?.dimensions || '163.4 x 78 x 8.75 mm' },
+        { label: 'Weight', value: product.specs?.weight || '249 g' },
+        { label: 'SIM', value: selectedRegion || 'Dual SIM (nano-SIM & eSIM) | Dual eSIM' },
+        { label: 'Display Type', value: product.specs?.display || 'LTPO Super Retina XDR OLED, 120Hz, HDR10, Dolby Vision' },
+        { label: 'Display Size', value: product.specs?.displaySize || '6.9 inches' },
+        { label: 'Display Resolution', value: product.specs?.displayResolution || '1320 × 2868 pixels, ~460 ppi' },
+        { label: 'Memory', value: `${selectedStorage?.label || '256GB'} / 12GB RAM` },
+        { label: 'Main Camera', value: product.specs?.camera || '48MP Wide Fusion camera with Variable Aperture, 48MP Periscope Telephoto, 48MP Ultra Wide | Video: 4K@24/25/30/60/100/120fps' },
+        { label: 'Selfie Camera', value: product.specs?.selfieCamera || '18MP Ultra Wide | Video: 4K@24/25/30/60fps | Features: ProRes RAW, Dolby Vision HDR' },
+        { label: 'Sound', value: 'Stereo Loudspeakers' },
+        { label: 'Battery Info', value: product.specs?.battery || 'Typical use: Up to 30 hours | Video playback: Up to 45 hours | 60W Capable Fast Charging' },
+        { label: 'Connectivity', value: 'Wi-Fi 7, Bluetooth: 6.0, NFC: Yes' },
+        { label: 'Sensors', value: 'Face ID | LiDAR Scanner | Barometer | High-dynamic-range gyro | High-g accelerometer | Proximity sensor | Dual ambient light sensors' },
+        { label: 'Other Features / Info', value: product.specs?.waterproof || 'Ceramic Shield 2, IP68 Water Resistance, Face ID, Ultra Wideband (Gen 2)' },
+      ];
+
+  const specsData = rawSpecs;
 
   return (
     <motion.main
@@ -539,48 +543,55 @@ export default function ProductDetailPage() {
           {activeTab === 'tabDescription' && (
             <div id="tabDescription" className="py-6 border-b border-gray-300">
               <h2 className="text-2xl font-semibold text-gray-900 mb-4">Descriptions</h2>
-              <div className="article space-y-4 text-gray-800 leading-relaxed text-sm md:text-base">
-                <h3 className="text-xl md:text-2xl font-bold text-gray-900">
-                  {product.name}
-                </h3>
-                <p>
-                  Experience the pinnacle of innovation with the {product.name}, where cutting-edge hardware meets refined design. Powered by the industry-leading processor, this smartphone delivers peak performance, unmatched energy efficiency, and groundbreaking AI-driven capabilities.
-                </p>
-                <p>
-                  The {product.name} price in Bangladesh starts from ৳{formatBDT(currentPrice)} at Apple Gadgets. The final price depends on the selected storage option and region variant, backed by genuine warranty and fast delivery across Bangladesh.
-                </p>
-                
-                <h4 className="text-lg font-bold text-gray-900 pt-2">{product.name} Key Features</h4>
-                <ul className="list-disc pl-5 space-y-1.5 text-gray-700">
-                  <li>Immersive Dynamic display with high refresh rate for silky-smooth responsiveness</li>
-                  <li>Pro-grade camera system with advanced low-light sensors and high-resolution video capture</li>
-                  <li>All-day intelligent battery life with rapid-speed fast charging technology</li>
-                  <li>Robust aerospace-grade materials with water and dust resistance certification</li>
-                  <li>Next-generation cellular 5G, Wi-Fi, Bluetooth, and NFC connectivity</li>
-                  <li>Rich stereo acoustics and ultra-secure biometric authentication</li>
-                </ul>
+              {product.descriptionHtml ? (
+                <div
+                  className="article space-y-4 text-gray-800 leading-relaxed text-sm md:text-base prose max-w-none [&_img]:rounded-xl [&_img]:my-4 [&_h2]:text-xl md:[&_h2]:text-2xl [&_h2]:font-bold [&_h2]:text-gray-900 [&_h2]:mt-6 [&_h3]:text-lg [&_h3]:font-bold [&_h3]:text-gray-900 [&_h3]:mt-4 [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:space-y-1.5 [&_a]:text-orange-500 [&_a]:underline"
+                  dangerouslySetInnerHTML={{ __html: product.descriptionHtml }}
+                />
+              ) : (
+                <div className="article space-y-4 text-gray-800 leading-relaxed text-sm md:text-base">
+                  <h3 className="text-xl md:text-2xl font-bold text-gray-900">
+                    {product.name}
+                  </h3>
+                  <p>
+                    Experience the pinnacle of innovation with the {product.name}, where cutting-edge hardware meets refined design. Powered by the industry-leading processor, this smartphone delivers peak performance, unmatched energy efficiency, and groundbreaking AI-driven capabilities.
+                  </p>
+                  <p>
+                    The {product.name} price in Bangladesh starts from ৳{formatBDT(currentPrice)} at Apple Gadgets. The final price depends on the selected storage option and region variant, backed by genuine warranty and fast delivery across Bangladesh.
+                  </p>
+                  
+                  <h4 className="text-lg font-bold text-gray-900 pt-2">{product.name} Key Features</h4>
+                  <ul className="list-disc pl-5 space-y-1.5 text-gray-700">
+                    <li>Immersive Dynamic display with high refresh rate for silky-smooth responsiveness</li>
+                    <li>Pro-grade camera system with advanced low-light sensors and high-resolution video capture</li>
+                    <li>All-day intelligent battery life with rapid-speed fast charging technology</li>
+                    <li>Robust aerospace-grade materials with water and dust resistance certification</li>
+                    <li>Next-generation cellular 5G, Wi-Fi, Bluetooth, and NFC connectivity</li>
+                    <li>Rich stereo acoustics and ultra-secure biometric authentication</li>
+                  </ul>
 
-                <h4 className="text-lg font-bold text-gray-900 pt-2">Why Buy from Apple Gadgets?</h4>
-                <p>
-                  Every device at Apple Gadgets is 100% brand new, authentic, and factory-sealed. We offer transparent pricing, prompt customer support, up to 36 months 0% EMI financing, and secure nationwide doorstep delivery.
-                </p>
+                  <h4 className="text-lg font-bold text-gray-900 pt-2">Why Buy from Apple Gadgets?</h4>
+                  <p>
+                    Every device at Apple Gadgets is 100% brand new, authentic, and factory-sealed. We offer transparent pricing, prompt customer support, up to 36 months 0% EMI financing, and secure nationwide doorstep delivery.
+                  </p>
 
-                <h4 className="text-lg font-bold text-gray-900 pt-2">Frequently Asked Questions</h4>
-                <div className="space-y-3 pt-1">
-                  <div>
-                    <h5 className="font-semibold text-gray-900">What is the {product.name} price in Bangladesh?</h5>
-                    <p className="text-gray-600 text-sm">The {product.name} price starts from ৳{formatBDT(currentPrice)} at Apple Gadgets BD.</p>
-                  </div>
-                  <div>
-                    <h5 className="font-semibold text-gray-900">Is EMI facility available for this product?</h5>
-                    <p className="text-gray-600 text-sm">Yes, 0% EMI is available on eligible credit cards from all leading Bangladeshi banks.</p>
-                  </div>
-                  <div>
-                    <h5 className="font-semibold text-gray-900">What warranty is provided?</h5>
-                    <p className="text-gray-600 text-sm">You receive a 10-day replacement warranty for manufacturing defects plus 1 year free service warranty.</p>
+                  <h4 className="text-lg font-bold text-gray-900 pt-2">Frequently Asked Questions</h4>
+                  <div className="space-y-3 pt-1">
+                    <div>
+                      <h5 className="font-semibold text-gray-900">What is the {product.name} price in Bangladesh?</h5>
+                      <p className="text-gray-600 text-sm">The {product.name} price starts from ৳{formatBDT(currentPrice)} at Apple Gadgets BD.</p>
+                    </div>
+                    <div>
+                      <h5 className="font-semibold text-gray-900">Is EMI facility available for this product?</h5>
+                      <p className="text-gray-600 text-sm">Yes, 0% EMI is available on eligible credit cards from all leading Bangladeshi banks.</p>
+                    </div>
+                    <div>
+                      <h5 className="font-semibold text-gray-900">What warranty is provided?</h5>
+                      <p className="text-gray-600 text-sm">You receive a 10-day replacement warranty for manufacturing defects plus 1 year free service warranty.</p>
+                    </div>
                   </div>
                 </div>
-              </div>
+              )}
             </div>
           )}
 
