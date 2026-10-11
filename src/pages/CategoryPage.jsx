@@ -131,6 +131,14 @@ export default function CategoryPage() {
     return list;
   }, [selectedBrands, minPrice, maxPrice, excludeOutOfStock, selectedNetworks, selectedStorages, selectedProcessors, sortBy]);
 
+  // Paginated phones (18 items per page exactly as Apple Gadgets BD)
+  const itemsPerPage = 18;
+  const paginatedPhones = useMemo(() => {
+    const start = (currentPage - 1) * itemsPerPage;
+    const pageItems = filteredPhones.slice(start, start + itemsPerPage);
+    return pageItems.length > 0 ? pageItems : filteredPhones.slice(0, itemsPerPage);
+  }, [filteredPhones, currentPage]);
+
   const formatBDT = (amount) => amount.toLocaleString('en-IN');
 
   // Filter lists from screenshots
@@ -719,7 +727,7 @@ export default function CategoryPage() {
             </div>
           ) : (
             <div className="grid grid-cols-2 lg:grid-cols-3 gap-3.5 sm:gap-4 md:gap-5">
-              {filteredPhones.map((phone) => (
+              {paginatedPhones.map((phone) => (
                 <ProductCard key={phone.id} phone={phone} />
               ))}
             </div>
@@ -730,7 +738,10 @@ export default function CategoryPage() {
             {/* Previous Button */}
             <button
               type="button"
-              onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
+              onClick={() => {
+                setCurrentPage(prev => Math.max(1, prev - 1));
+                window.scrollTo({ top: 350, behavior: 'smooth' });
+              }}
               disabled={currentPage === 1}
               className={`flex items-center gap-1.5 px-4 py-2 rounded-lg border text-xs sm:text-sm font-medium transition-colors cursor-pointer ${
                 currentPage === 1
@@ -742,53 +753,47 @@ export default function CategoryPage() {
               <span>Previous</span>
             </button>
 
-            {/* Page Numbers */}
+            {/* Page Numbers: 1, 2, 3, 4 ... 13, 14 */}
             <div className="flex items-center gap-1 sm:gap-2">
-              <button
-                type="button"
-                onClick={() => setCurrentPage(1)}
-                className={`size-8 sm:size-9 rounded-lg text-xs sm:text-sm font-medium flex items-center justify-center cursor-pointer ${
-                  currentPage === 1
-                    ? 'bg-[#f97316] text-white font-bold'
-                    : 'text-gray-700 hover:text-orange-500'
-                }`}
-              >
-                1
-              </button>
-              <button
-                type="button"
-                onClick={() => setCurrentPage(2)}
-                className={`size-8 sm:size-9 rounded-lg text-xs sm:text-sm font-medium flex items-center justify-center cursor-pointer ${
-                  currentPage === 2
-                    ? 'bg-[#f97316] text-white font-bold'
-                    : 'text-gray-700 hover:text-orange-500'
-                }`}
-              >
-                2
-              </button>
-              <button
-                type="button"
-                onClick={() => setCurrentPage(3)}
-                className={`size-8 sm:size-9 rounded-lg text-xs sm:text-sm font-medium flex items-center justify-center cursor-pointer ${
-                  currentPage === 3
-                    ? 'bg-[#f97316] text-white font-bold'
-                    : 'text-gray-700 hover:text-orange-500'
-                }`}
-              >
-                3
-              </button>
+              {[1, 2, 3, 4].map((p) => (
+                <button
+                  key={p}
+                  type="button"
+                  onClick={() => {
+                    setCurrentPage(p);
+                    window.scrollTo({ top: 350, behavior: 'smooth' });
+                  }}
+                  className={`size-8 sm:size-9 rounded-lg text-xs sm:text-sm font-medium flex items-center justify-center cursor-pointer transition-colors ${
+                    currentPage === p
+                      ? 'bg-[#f97316] text-white font-bold'
+                      : 'text-gray-700 hover:text-orange-500'
+                  }`}
+                >
+                  {p}
+                </button>
+              ))}
               <span className="text-gray-400 text-xs px-1">...</span>
               <button
                 type="button"
-                onClick={() => setCurrentPage(13)}
-                className="size-8 sm:size-9 rounded-lg text-xs sm:text-sm font-medium text-gray-700 hover:text-orange-500 flex items-center justify-center cursor-pointer"
+                onClick={() => {
+                  setCurrentPage(13);
+                  window.scrollTo({ top: 350, behavior: 'smooth' });
+                }}
+                className={`size-8 sm:size-9 rounded-lg text-xs sm:text-sm font-medium flex items-center justify-center cursor-pointer ${
+                  currentPage === 13 ? 'bg-[#f97316] text-white font-bold' : 'text-gray-700 hover:text-orange-500'
+                }`}
               >
                 13
               </button>
               <button
                 type="button"
-                onClick={() => setCurrentPage(14)}
-                className="size-8 sm:size-9 rounded-lg text-xs sm:text-sm font-medium text-gray-700 hover:text-orange-500 flex items-center justify-center cursor-pointer"
+                onClick={() => {
+                  setCurrentPage(14);
+                  window.scrollTo({ top: 350, behavior: 'smooth' });
+                }}
+                className={`size-8 sm:size-9 rounded-lg text-xs sm:text-sm font-medium flex items-center justify-center cursor-pointer ${
+                  currentPage === 14 ? 'bg-[#f97316] text-white font-bold' : 'text-gray-700 hover:text-orange-500'
+                }`}
               >
                 14
               </button>
@@ -797,7 +802,10 @@ export default function CategoryPage() {
             {/* Next Button */}
             <button
               type="button"
-              onClick={() => setCurrentPage(prev => Math.min(14, prev + 1))}
+              onClick={() => {
+                setCurrentPage(prev => Math.min(14, prev + 1));
+                window.scrollTo({ top: 350, behavior: 'smooth' });
+              }}
               className="flex items-center gap-1.5 px-4 py-2 rounded-lg border border-gray-300 text-xs sm:text-sm font-medium text-gray-700 hover:border-orange-500 hover:text-orange-500 transition-colors cursor-pointer"
             >
               <span>Next</span>
