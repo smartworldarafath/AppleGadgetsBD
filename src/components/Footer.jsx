@@ -52,19 +52,19 @@ export default function Footer() {
             </div>
 
             {/* App Store & Google Play Badges */}
-            <div className="flex flex-wrap gap-3 pt-2">
+            <div className="flex flex-wrap gap-2.5 pt-2">
               <a
                 href="https://apps.apple.com"
                 target="_blank"
                 rel="noreferrer"
-                className="flex items-center gap-2 bg-[#1a1a1a] hover:bg-[#252525] border border-neutral-800 px-3.5 py-2 rounded-xl transition-colors"
+                className="flex items-center gap-2.5 bg-[#000000] hover:bg-[#1a1a1a] border border-[#333333] px-3.5 py-1.5 rounded-lg transition-all shadow-sm group"
               >
-                <svg className="size-6 text-white" viewBox="0 0 24 24" fill="currentColor">
+                <svg className="w-6 h-6 text-white shrink-0 fill-current" viewBox="0 0 24 24">
                   <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.37c.61-.75 1.04-1.8 0.92-2.85-.92.04-2.01.62-2.65 1.37-.56.64-1.04 1.69-.91 2.71 1.03.08 2.05-.53 2.64-1.23z"/>
                 </svg>
-                <div className="text-left">
-                  <p className="text-[10px] text-gray-400 uppercase leading-none">Download on the</p>
-                  <p className="text-xs font-bold text-white leading-tight">App Store</p>
+                <div className="text-left leading-none">
+                  <p className="text-[9px] text-gray-300 font-normal tracking-tight">Download on the</p>
+                  <p className="text-[14px] font-semibold text-white tracking-tight mt-0.5">App Store</p>
                 </div>
               </a>
 
@@ -72,14 +72,17 @@ export default function Footer() {
                 href="https://play.google.com"
                 target="_blank"
                 rel="noreferrer"
-                className="flex items-center gap-2 bg-[#1a1a1a] hover:bg-[#252525] border border-neutral-800 px-3.5 py-2 rounded-xl transition-colors"
+                className="flex items-center gap-2.5 bg-[#000000] hover:bg-[#1a1a1a] border border-[#333333] px-3.5 py-1.5 rounded-lg transition-all shadow-sm group"
               >
-                <svg className="size-6 text-white" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M3.609 1.814L13.792 12 3.61 22.186a2.03 2.03 0 0 1-.61-1.464V3.278c0-.573.23-1.099.61-1.464zm11.233 11.236l2.42 2.42-12.78 7.375 10.36-9.795zm0-2.1l-10.36-9.795 12.78 7.375-2.42 2.42zm1.463 1.05l4.316 2.492a1.36 1.36 0 0 0 0-2.356l-4.316-2.492-1.393 1.178 1.393 1.178z"/>
+                <svg className="w-5 h-5 shrink-0" viewBox="0 0 512 512">
+                  <path fill="#00e676" d="M380.9 237.5L83.1 65.6C72.8 59.7 60 67.1 60 78.9v354.2c0 11.8 12.8 19.2 23.1 13.3l297.8-171.9c10.5-6.1 10.5-20.9 0-27z"/>
+                  <path fill="#00b0ff" d="M60 78.9v354.2c0 8.2 6.2 15 14.3 16.1l193.3-193.2L74.3 62.8C66.2 63.9 60 70.7 60 78.9z"/>
+                  <path fill="#ffd600" d="M380.9 237.5l-113.3 65.4-73.4-73.4 73.4-73.4 113.3 65.4c10.5 6.1 10.5 20.9 0-27z"/>
+                  <path fill="#ff3d00" d="M267.6 302.9L74.3 449.2c2.7.4 5.5 0 8.8-1.9l297.8-171.9-113.3 27.5z"/>
                 </svg>
-                <div className="text-left">
-                  <p className="text-[10px] text-gray-400 uppercase leading-none">GET IT ON</p>
-                  <p className="text-xs font-bold text-white leading-tight">Google Play</p>
+                <div className="text-left leading-none">
+                  <p className="text-[8px] text-gray-300 font-semibold tracking-wider uppercase">GET IT ON</p>
+                  <p className="text-[14px] font-semibold text-white tracking-tight mt-0.5">Google Play</p>
                 </div>
               </a>
             </div>
@@ -92,38 +95,44 @@ export default function Footer() {
             <div className="space-y-4 text-xs text-gray-300">
               {/* Outlet 1 */}
               <div className="space-y-1">
-                <div className="flex items-start gap-2">
-                  <span className="text-orange-500 text-sm leading-tight shrink-0">📍</span>
+                <div className="flex items-start gap-2.5">
+                  <svg className="w-3.5 h-4.5 text-[#F27F20] shrink-0 mt-0.5" viewBox="0 0 14 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path fillRule="evenodd" clipRule="evenodd" d="M7 0C3.13401 0 0 3.13401 0 7C0 11.5 5.5 17 7 18C8.5 17 14 11.5 14 7C14 3.13401 10.866 0 7 0ZM7 9.5C5.61929 9.5 4.5 8.38071 4.5 7C4.5 5.61929 5.61929 4.5 7 4.5C8.38071 4.5 9.5 5.61929 9.5 7C9.5 8.38071 8.38071 9.5 7 9.5Z" fill="#F27F20"/>
+                  </svg>
                   <p className="font-semibold text-white leading-snug">
                     Apple Gadgets - Basement 2, Shop 26, Bashundhara City Shopping Complex
                   </p>
                 </div>
-                <p className="text-gray-400 pl-5">Basement 2, Shop 26</p>
+                <p className="text-gray-400 pl-6">Basement 2, Shop 26</p>
               </div>
 
               {/* Outlet 2 */}
               <div className="space-y-1">
-                <div className="flex items-start gap-2">
-                  <span className="text-orange-500 text-sm leading-tight shrink-0">📍</span>
+                <div className="flex items-start gap-2.5">
+                  <svg className="w-3.5 h-4.5 text-[#F27F20] shrink-0 mt-0.5" viewBox="0 0 14 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path fillRule="evenodd" clipRule="evenodd" d="M7 0C3.13401 0 0 3.13401 0 7C0 11.5 5.5 17 7 18C8.5 17 14 11.5 14 7C14 3.13401 10.866 0 7 0ZM7 9.5C5.61929 9.5 4.5 8.38071 4.5 7C4.5 5.61929 5.61929 4.5 7 4.5C8.38071 4.5 9.5 5.61929 9.5 7C9.5 8.38071 8.38071 9.5 7 9.5Z" fill="#F27F20"/>
+                  </svg>
                   <p className="font-semibold text-white leading-snug">
                     Apple Gadgets - Level- 5, Block- A, Shop- 6, 7, 8. Bashundhara City Shopping Complex
                   </p>
                 </div>
-                <p className="text-gray-400 pl-5">Level- 5, Block- A, Shop- 6, 7, 8</p>
+                <p className="text-gray-400 pl-6">Level- 5, Block- A, Shop- 6, 7, 8</p>
               </div>
 
               {/* Outlet 3 */}
               <div className="space-y-1">
-                <div className="flex items-start gap-2">
-                  <span className="text-orange-500 text-sm leading-tight shrink-0">📍</span>
+                <div className="flex items-start gap-2.5">
+                  <svg className="w-3.5 h-4.5 text-[#F27F20] shrink-0 mt-0.5" viewBox="0 0 14 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path fillRule="evenodd" clipRule="evenodd" d="M7 0C3.13401 0 0 3.13401 0 7C0 11.5 5.5 17 7 18C8.5 17 14 11.5 14 7C14 3.13401 10.866 0 7 0ZM7 9.5C5.61929 9.5 4.5 8.38071 4.5 7C4.5 5.61929 5.61929 4.5 7 4.5C8.38071 4.5 9.5 5.61929 9.5 7C9.5 8.38071 8.38071 9.5 7 9.5Z" fill="#F27F20"/>
+                  </svg>
                   <p className="font-semibold text-white leading-snug">
                     Apple Gadgets - Level 4, Zone A (West Court), Shop 28D, Jamuna Future Park
                   </p>
                 </div>
-                <p className="text-gray-400 pl-5">Level 4, Zone A (West Court), Shop 28D</p>
+                <p className="text-gray-400 pl-6">Level 4, Zone A (West Court), Shop 28D</p>
               </div>
 
-              <Link to="/category/mobile-phone" className="text-orange-500 font-semibold hover:underline block pt-1 pl-5">
+              <Link to="/category/mobile-phone" className="text-orange-500 font-semibold hover:underline block pt-1 pl-6">
                 See All Outlet
               </Link>
             </div>
