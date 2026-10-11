@@ -3605,7 +3605,7 @@ export const PHONES = [
     "overview": "Get the authentic OnePlus Nord CE6 at the best price in Bangladesh from Apple Gadgets BD. Includes official service warranty, genuine replacement guarantee, and 0% EMI payment options."
   },
   {
-    "id": "motorola-moto-g37",
+    "id": "motorola-moto-g37-2",
     "slug": "motorola-moto-g37",
     "name": "Motorola Moto G37 Power",
     "brand": "motorola",
