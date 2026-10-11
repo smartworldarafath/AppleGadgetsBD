@@ -202,21 +202,17 @@ export default function ProductDetailPage() {
           
           {/* Brand Logo & Add to Compare */}
           <div className="flex items-center justify-between">
-            <Link className="w-14 h-auto block" to={`/category/mobile-phone/${product.brand}`}>
-              <img
-                className="h-auto max-h-10 w-auto object-contain"
-                src={brandLogo}
-                alt={product.brandName}
-                onError={(e) => { e.currentTarget.style.display = 'none'; }}
-              />
+            <Link className="flex items-center gap-1.5 text-gray-900 font-semibold text-base hover:text-orange-500 transition-colors" to={`/category/mobile-phone/${product.brand}`}>
+              <span className="text-lg"></span>
+              <span>{product.brandName || 'Apple'}</span>
             </Link>
             <div className="flex items-center gap-4">
               <button
                 type="button"
                 onClick={() => toggleCompare(product.id)}
-                className="flex items-center gap-1 sm:min-w-[156px] h-max text-orange-500 text-base font-semibold hover:opacity-80 transition-opacity cursor-pointer"
+                className="flex items-center gap-1.5 text-orange-500 text-sm font-semibold hover:opacity-80 transition-opacity cursor-pointer"
               >
-                <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg width="20" height="20" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M19 9.5H6.65856C5.65277 9.5 5.14987 9.5 5.02472 9.19134C4.89957 8.88268 5.25517 8.51942 5.96637 7.79289L8.21091 5.5" stroke="#F27F20" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path>
                   <path d="M5 15.5H17.3414C18.3472 15.5 18.8501 15.5 18.9753 15.8087C19.1004 16.1173 18.7448 16.4806 18.0336 17.2071L15.7891 19.5" stroke="#F27F20" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path>
                 </svg>
@@ -230,49 +226,52 @@ export default function ProductDetailPage() {
             {product.name}
           </h1>
 
-          {/* Pricing Row */}
-          <div className="flex flex-wrap xl:flex-nowrap items-center lg:items-start 2xl:items-center gap-2 !mt-3">
-            <div className="group flex items-center lg:items-start 2xl:items-center gap-1.5">
-              <div className="flex items-center flex-row lg:flex-col 2xl:flex-row">
-                <p className="text-2xl font-bold text-gray-900">
-                  ৳{formatBDT(currentPrice)}
-                </p>
-                <span className="text-xs sm:text-base text-gray-600 ml-0.5">
-                  (Cash Price)
-                </span>
-              </div>
-              <div className="w-px h-3.5 hidden 2xl:block bg-gray-300"></div>
-              {currentSave > 0 && (
-                <p className="bg-green-100 text-green-600 h-max px-3 py-1.5 rounded-3xl text-xs font-medium">
-                  ৳ {formatBDT(currentSave)} OFF
-                </p>
-              )}
-              {currentRegular > currentPrice && (
-                <p className="text-lg font-normal text-gray-400">
-                  <del>৳{formatBDT(currentRegular)}</del>
-                </p>
-              )}
+          {/* Pricing Row matching screenshot 100% */}
+          <div className="flex flex-wrap items-center gap-2 !mt-2 text-sm md:text-base">
+            <div className="flex items-center gap-1.5">
+              <p className="text-2xl font-bold text-gray-900">
+                ৳{formatBDT(currentPrice)}
+              </p>
+              <span className="text-xs sm:text-sm text-gray-600">
+                (Cash Price)
+              </span>
             </div>
-            <div className="w-px h-3.5 hidden 2xl:block bg-gray-300"></div>
-            <p className="text-base capitalize">
-              <span className="font-semibold">Availability:</span> in stock
+            
+            {currentSave > 0 && (
+              <p className="bg-green-100 text-green-600 h-max px-2.5 py-1 rounded-full text-xs font-semibold">
+                ৳ {formatBDT(currentSave)} OFF
+              </p>
+            )}
+
+            {currentRegular > currentPrice && (
+              <p className="text-base text-gray-300 font-normal">
+                <del>৳{formatBDT(currentRegular)}</del>
+              </p>
+            )}
+
+            <div className="w-px h-3.5 bg-gray-200 mx-1"></div>
+
+            <p className="text-sm">
+              <span className="font-semibold text-gray-900">Availability:</span> <span className="text-gray-900 capitalize font-medium">{product.status || 'In Stock'}</span>
             </p>
-            <div className="w-px h-3.5 bg-gray-300"></div>
-            <p className="text-base">
-              <span className="font-semibold">Code:</span> {productCode}
+
+            <div className="w-px h-3.5 bg-gray-200 mx-1"></div>
+
+            <p className="text-sm">
+              <span className="font-semibold text-gray-900">Code:</span> <span className="text-gray-900 font-medium">{productCode}</span>
             </p>
           </div>
 
-          {/* Variants Selectors: Color, Storage, Region */}
-          <div className="grid xl:grid-cols-2 gap-2 xl:gap-4">
+          {/* Variants Selectors: Color & Storage Side-by-Side Card Blocks */}
+          <div className="grid md:grid-cols-2 gap-3 !mt-4">
             
             {/* Color Selector */}
-            <div className="p-4 rounded-xl border border-gray-300">
-              <p className="text-base font-semibold text-gray-900 pb-2">Color:</p>
+            <div className="p-4 rounded-2xl border border-gray-200 bg-white">
+              <p className="text-sm font-semibold text-gray-900 pb-3">Color:</p>
               <div className="flex items-center flex-wrap gap-2">
                 {(product.colors && product.colors.length > 0 ? product.colors : [
-                  { name: 'Burgundy', hex: '#552940' },
                   { name: 'Black', hex: '#212121' },
+                  { name: 'Burgundy', hex: '#552940' },
                   { name: 'Glacier', hex: '#6790C0' },
                   { name: 'Silver', hex: '#D8D8D8' },
                 ]).map((c) => {
@@ -282,14 +281,14 @@ export default function ProductDetailPage() {
                       key={c.name}
                       type="button"
                       onClick={() => setSelectedColor(c)}
-                      className={`w-fit duration-300 rounded-lg border py-1.5 px-3 flex items-center gap-2 cursor-pointer transition-all ${
+                      className={`h-9 rounded-full border px-3.5 flex items-center gap-2 cursor-pointer transition-all ${
                         isSelected
-                          ? 'border-orange-500 font-semibold bg-orange-50/40 text-orange-600'
-                          : 'border-gray-300 hover:border-gray-400 text-gray-700'
+                          ? 'border-orange-500 font-semibold text-gray-900 shadow-xs'
+                          : 'border-gray-200 hover:border-gray-300 text-gray-700 bg-white'
                       }`}
                     >
-                      <div className="w-4 h-4 rounded-full border border-black/10 shrink-0" style={{ backgroundColor: c.hex || '#212121' }}></div>
-                      <span className="text-sm font-medium">{c.name}</span>
+                      <div className="w-3.5 h-3.5 rounded-full border border-black/10 shrink-0" style={{ backgroundColor: c.hex || '#212121' }}></div>
+                      <span className="text-xs font-medium">{c.name}</span>
                     </button>
                   );
                 })}
@@ -297,13 +296,14 @@ export default function ProductDetailPage() {
             </div>
 
             {/* Storage Selector */}
-            <div className="p-4 rounded-xl border border-gray-300">
-              <p className="text-base font-semibold text-gray-900 pb-2">Storage:</p>
+            <div className="p-4 rounded-2xl border border-gray-200 bg-white">
+              <p className="text-sm font-semibold text-gray-900 pb-3">Storage:</p>
               <div className="flex items-center flex-wrap gap-2">
                 {(product.storages && product.storages.length > 0 ? product.storages : [
+                  { label: '1TB', price: product.price, regularPrice: product.regularPrice },
+                  { label: '2TB', price: product.price, regularPrice: product.regularPrice },
                   { label: '256GB', price: product.price, regularPrice: product.regularPrice },
-                  { label: '512GB', price: product.price + 18000, regularPrice: (product.regularPrice || product.price) + 18000 },
-                  { label: '1TB', price: product.price + 43000, regularPrice: (product.regularPrice || product.price) + 43000 },
+                  { label: '512GB', price: product.price, regularPrice: product.regularPrice },
                 ]).map((st) => {
                   const isSelected = selectedStorage?.label === st.label;
                   return (
@@ -311,13 +311,13 @@ export default function ProductDetailPage() {
                       key={st.label}
                       type="button"
                       onClick={() => setSelectedStorage(st)}
-                      className={`w-fit duration-300 rounded-lg border py-1.5 px-3 cursor-pointer transition-all ${
+                      className={`h-9 min-w-14 rounded-full border px-3.5 flex items-center justify-center cursor-pointer transition-all ${
                         isSelected
-                          ? 'border-orange-500 font-semibold bg-orange-50/40 text-orange-600'
-                          : 'border-gray-300 hover:border-gray-400 text-gray-700'
+                          ? 'border-orange-500 font-semibold text-gray-900 shadow-xs'
+                          : 'border-gray-200 hover:border-gray-300 text-gray-700 bg-white'
                       }`}
                     >
-                      <span className="text-sm font-medium">{st.label}</span>
+                      <span className="text-xs font-medium">{st.label}</span>
                     </button>
                   );
                 })}
@@ -325,123 +325,95 @@ export default function ProductDetailPage() {
             </div>
           </div>
 
-          {/* Region / SIM Selector */}
-          {product.regions && product.regions.length > 0 && (
-            <div className="p-4 rounded-xl border border-gray-300">
-              <p className="text-base font-semibold text-gray-900 pb-2">Region / SIM:</p>
-              <div className="flex items-center flex-wrap gap-2">
-                {product.regions.map((reg) => {
-                  const isSelected = selectedRegion === reg;
-                  return (
-                    <button
-                      key={reg}
-                      type="button"
-                      onClick={() => setSelectedRegion(reg)}
-                      className={`w-fit duration-300 rounded-lg border py-1.5 px-3 cursor-pointer transition-all ${
-                        isSelected
-                          ? 'border-orange-500 font-semibold bg-orange-50/40 text-orange-600'
-                          : 'border-gray-300 hover:border-gray-400 text-gray-700'
-                      }`}
-                    >
-                      <span className="text-sm font-medium">{reg}</span>
-                    </button>
-                  );
-                })}
+          {/* Key Bullet Points Section (Matching User Screenshot Exactly) */}
+          <div className="py-2 space-y-2">
+            {(product.keyPoints && product.keyPoints.length > 0 ? product.keyPoints : [
+              '1 Year Apple Official Warranty Support',
+              'Activation is Mandatory to Get the Offer Price'
+            ]).map((point, pIdx) => (
+              <div key={pIdx} className="flex items-center gap-2.5 text-sm font-bold text-gray-900">
+                <span className="w-1.5 h-1.5 rounded-full bg-gray-400 shrink-0"></span>
+                <span>{point}</span>
               </div>
-            </div>
-          )}
+            ))}
+          </div>
 
           {/* Select Quantity */}
-          <div className="space-y-4">
-            <p className="text-base font-semibold text-gray-900">Select Quantity:</p>
-            <div className="max-w-[164px] mt-3 p-1.5 flex items-center justify-between bg-gray-300/50 border border-gray-300 rounded-full">
+          <div className="space-y-2 !mt-4">
+            <p className="text-sm font-semibold text-gray-900">Select Quantity:</p>
+            <div className="w-[140px] h-10 p-1 flex items-center justify-between bg-gray-100 border border-gray-200 rounded-full">
               <button
                 type="button"
                 onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                className="bg-white w-7 h-7 md:w-9 md:h-9 grid place-items-center rounded-full shadow-xs hover:bg-gray-100 transition-colors cursor-pointer"
+                className="bg-white w-8 h-8 flex items-center justify-center rounded-full shadow-xs hover:bg-gray-50 transition-colors cursor-pointer text-gray-700 font-bold"
               >
-                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M4.1665 10H15.8332" stroke="#0E273C" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"></path>
-                </svg>
+                -
               </button>
-              <input
-                type="number"
-                id="quantity"
-                min="1"
-                readOnly
-                className="w-12 lg:w-16 h-full outline-none px-1 text-gray-900 text-center text-base md:text-xl bg-transparent font-semibold"
-                name="quantity"
-                value={quantity}
-              />
+              <span className="w-10 text-center text-sm font-semibold text-gray-900">
+                {quantity}
+              </span>
               <button
                 type="button"
                 onClick={() => setQuantity(quantity + 1)}
-                className="bg-white w-7 h-7 md:w-9 md:h-9 grid place-items-center rounded-full shadow-xs hover:bg-gray-100 transition-colors cursor-pointer"
+                className="bg-white w-8 h-8 flex items-center justify-center rounded-full shadow-xs hover:bg-gray-50 transition-colors cursor-pointer text-gray-700 font-bold"
               >
-                <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M10 4.13574L10 17.4691" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"></path>
-                  <path d="M3.33203 10.8027L16.6654 10.8027" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"></path>
-                </svg>
+                +
               </button>
             </div>
           </div>
 
-          {/* Action Buttons: Shop Now & Add To Cart (with transparent blur effect requested by user) */}
-          <div className="gap-3 3xl:gap-4 items-center hidden xl:inline-flex w-full">
+          {/* Action Buttons: Shop Now (solid orange pill) & Add To Cart (white outline pill) */}
+          <div className="grid grid-cols-2 gap-3 !mt-5 w-full">
             <button
               type="button"
               onClick={handleBuyNow}
-              className="whitespace-nowrap font-medium transition-all duration-300 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring text-white shadow-md hover:shadow-lg py-2 rounded-lg inline-flex items-center text-base justify-center w-full h-11 3xl:h-12 px-3 3xl:px-6 cursor-pointer backdrop-blur-md bg-orange-500/90 hover:bg-orange-600 active:scale-98 border border-white/20"
+              className="h-12 w-full font-semibold text-white bg-[#F17E23] hover:bg-orange-600 rounded-full transition-all duration-200 shadow-sm active:scale-98 flex items-center justify-center cursor-pointer"
             >
               Shop Now
             </button>
             <button
               type="button"
               onClick={handleAddToCart}
-              className={`whitespace-nowrap font-medium transition-all duration-300 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring border shadow-sm py-2 rounded-lg inline-flex items-center text-base justify-center gap-1.5 w-full h-11 3xl:h-12 px-3 3xl:px-6 cursor-pointer backdrop-blur-md active:scale-98 ${
+              className={`h-12 w-full font-semibold border rounded-full transition-all duration-200 shadow-2xs active:scale-98 flex items-center justify-center gap-2 cursor-pointer ${
                 isAdded
-                  ? 'bg-green-600/90 border-green-600 text-white shadow-md'
-                  : 'border-gray-300/80 bg-white/40 hover:bg-black hover:text-white hover:border-black text-gray-900'
+                  ? 'bg-green-600 border-green-600 text-white'
+                  : 'bg-white border-gray-300 text-gray-900 hover:bg-gray-50'
               }`}
             >
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M4 19C4 19.5304 4.21071 20.0391 4.58579 20.4142C4.96086 20.7893 5.46957 21 6 21C6.53043 21 7.03914 20.7893 7.41421 20.4142C7.78929 20.0391 8 19.5304 8 19C8 18.4696 7.78929 17.9609 7.41421 17.5858C7.03914 17.2107 6.53043 17 6 17C5.46957 17 4.96086 17.2107 4.58579 17.5858C4.21071 17.9609 4 18.4696 4 19Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"></path>
                 <path d="M15 19C15 19.5304 15.2107 20.0391 15.5858 20.4142C15.9609 20.7893 16.4696 21 17 21C17.5304 21 18.0391 20.7893 18.4142 20.4142C18.7893 20.0391 19 19.5304 19 19C19 18.4696 18.7893 17.9609 18.4142 17.5858C18.0391 17.2107 17.5304 17 17 17C16.4696 17 15.9609 17.2107 15.5858 17.5858C15.2107 17.9609 15 18.4696 15 19Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"></path>
                 <path d="M17 17H6V3H4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"></path>
                 <path d="M6 5L20 6L19 13H6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"></path>
               </svg>
-              {isAdded ? 'Added! ✓' : 'Add To Cart'}
+              <span>{isAdded ? 'Added! ✓' : 'Add To Cart'}</span>
             </button>
           </div>
 
-          {/* EMI & WhatsApp Row */}
-          <div className="flex md:flex-row flex-col w-full gap-3 3xl:gap-4 items-center">
-            <div className="flex gap-2 w-full items-center py-3 px-4 rounded-lg border border-gray-200 bg-orange-50">
-              <svg className="stroke-gray-900" width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M13.3335 14.6663C13.3335 14.8874 13.4213 15.0993 13.5776 15.2556C13.7339 15.4119 13.9458 15.4997 14.1668 15.4997C14.3878 15.4997 14.5998 15.4119 14.7561 15.2556C14.9124 15.0993 15.0002 14.8874 15.0002 14.6663C15.0002 14.4453 14.9124 14.2334 14.7561 14.0771C14.5998 13.9208 14.3878 13.833 14.1668 13.833C13.9458 13.833 13.7339 13.9208 13.5776 14.0771C13.4213 14.2334 13.3335 14.4453 13.3335 14.6663Z" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path>
-                <path d="M5 6.33333C5 6.55435 5.0878 6.76631 5.24408 6.92259C5.40036 7.07887 5.61232 7.16667 5.83333 7.16667C6.05435 7.16667 6.26631 7.07887 6.42259 6.92259C6.57887 6.76631 6.66667 6.55435 6.66667 6.33333C6.66667 6.11232 6.57887 5.90036 6.42259 5.74408C6.26631 5.5878 6.05435 5.5 5.83333 5.5C5.61232 5.5 5.40036 5.5878 5.24408 5.74408C5.0878 5.90036 5 6.11232 5 6.33333Z" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path>
-                <path d="M5 15.5L15 5.5" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path>
-              </svg>
-              <p className="text-base text-gray-900">
-                EMI Available <button type="button" onClick={() => setIsEMIModalOpen(true)} className="font-semibold underline text-gray-900 hover:text-orange-500 cursor-pointer">View Plans</button>
+          {/* EMI & WhatsApp Row (Matching screenshot side by side) */}
+          <div className="grid grid-cols-2 gap-3 !mt-3">
+            <div className="flex items-center gap-2 py-3 px-4 rounded-xl border border-gray-200 bg-orange-50/50 text-xs md:text-sm">
+              <span className="text-gray-900 font-semibold">%</span>
+              <p className="text-gray-900">
+                EMI Available <button type="button" onClick={() => setIsEMIModalOpen(true)} className="font-bold underline text-gray-900 hover:text-orange-500 cursor-pointer">View Plans</button>
               </p>
             </div>
             <a
               target="_blank"
               rel="noreferrer"
-              className="flex gap-2 w-full items-center py-3 px-4 rounded-lg border border-green-500/20 bg-green-100 hover:bg-green-200/80 transition-colors"
+              className="flex items-center gap-2 py-3 px-4 rounded-xl border border-green-500/20 bg-green-100/70 hover:bg-green-100 text-xs md:text-sm transition-colors text-gray-900"
               href={`https://wa.me/+8801711105888?text=I%20want%20to%20know%20more%20about%20*${encodeURIComponent(product.name)}*%0AURL:%20applegadgetsbd.com/product/${product.slug}`}
             >
-              <svg width="19" height="19" className="text-[#1CBF5A]" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <svg width="18" height="18" className="text-[#1CBF5A]" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path fillRule="evenodd" clipRule="evenodd" d="M9.49985 0.541326C4.5523 0.541326 0.541518 4.55211 0.541518 9.49966C0.541518 10.7337 0.791411 11.9111 1.24395 12.9825C1.36266 13.2636 1.44269 13.4536 1.49614 13.5995C1.55067 13.7484 1.55832 13.8022 1.55928 13.8161C1.5647 13.8944 1.5449 14.0008 1.40977 14.5058L0.562756 17.6714C0.505063 17.8871 0.566743 18.1171 0.724576 18.2749C0.88241 18.4328 1.11244 18.4944 1.32806 18.4368L4.49371 17.5897C4.99873 17.4546 5.10513 17.4348 5.18339 17.4402C5.19727 17.4412 5.25112 17.4488 5.4 17.5034C5.54595 17.5568 5.73589 17.6369 6.01697 17.7556C7.08845 18.2081 8.26577 18.458 9.49985 18.458C14.4474 18.458 18.4582 14.4472 18.4582 9.49966C18.4582 4.55211 14.4474 0.541326 9.49985 0.541326Z" fill="#1CBF5A"></path>
               </svg>
-              <span className="text-gray-900 font-medium">Whatsapp</span>
+              <span className="font-semibold">Whatsapp</span>
             </a>
           </div>
 
-          {/* Delivery Timescale */}
-          <div className="flex gap-2 items-center py-3 px-4 mt-3 rounded-lg border border-gray-200">
-            <svg className="stroke-gray-900" width="26" height="22" stroke="currentColor" viewBox="0 0 26 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+          {/* Delivery Timescale (Full width border box) */}
+          <div className="flex items-center gap-2.5 py-3 px-4 rounded-xl border border-gray-200 text-xs md:text-sm text-gray-700 !mt-3">
+            <svg className="stroke-gray-900" width="22" height="18" stroke="currentColor" viewBox="0 0 26 22" fill="none" xmlns="http://www.w3.org/2000/svg">
               <ellipse cx="18.8333" cy="18.0003" rx="2.33333" ry="2.33333" strokeWidth="1.7"></ellipse>
               <ellipse cx="7.16658" cy="18.0003" rx="2.33333" ry="2.33333" strokeWidth="1.7"></ellipse>
               <path d="M4.83325 17.9682C3.55374 17.9044 2.75554 17.7141 2.18752 17.1461C1.61951 16.578 1.42917 15.7798 1.36539 14.5003M9.49992 18.0003H16.4999M21.1666 17.9682C22.4461 17.9044 23.2443 17.7141 23.8123 17.1461C24.6666 16.2918 24.6666 14.9169 24.6666 12.167V9.83366H19.1833C18.3147 9.83366 17.8804 9.83366 17.5289 9.71946C16.8185 9.48865 16.2616 8.93172 16.0308 8.22137C15.9166 7.86989 15.9166 7.43559 15.9166 6.56699C15.9166 5.2641 15.9166 4.61265 15.7453 4.08543C15.3991 3.0199 14.5637 2.18451 13.4981 1.83829C12.9709 1.66699 12.3195 1.66699 11.0166 1.66699H1.33325" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"></path>
@@ -449,8 +421,8 @@ export default function ProductDetailPage() {
               <path d="M1.33325 9.83301H5.99992" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"></path>
               <path d="M15.9167 4H18.0415C19.7394 4 20.5884 4 21.2792 4.41266C21.9701 4.82532 22.3726 5.5728 23.1776 7.06775L24.6667 9.83333" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"></path>
             </svg>
-            <p className="text-base text-gray-900">
-              Delivery Timescale: <span className="font-semibold">3-5 Days</span>
+            <p>
+              Delivery Timescale: <span className="font-semibold text-gray-900">3-5 Days</span>
             </p>
           </div>
         </div>
