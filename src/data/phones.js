@@ -27,62 +27,72 @@ export const PHONES = [
     "brand": "iphone",
     "brandName": "Apple",
     "page": 1,
-    "price": 207999,
+    "price": 206999,
     "regularPrice": 212000,
-    "saveAmount": 4001,
+    "saveAmount": 5001,
     "status": "In Stock",
-    "image": "https://adminapi.applegadgetsbd.com/storage/media/medium/iPhone-18-Pro-Max-1213.png",
+    "image": "https://adminapi.applegadgetsbd.com/storage/media/large/iPhone-18-Pro-Max-1213.png",
     "gallery": [
-      "https://adminapi.applegadgetsbd.com/storage/media/medium/iPhone-18-Pro-Max-1213.png",
-      "https://adminapi.applegadgetsbd.com/storage/media/medium/iPhone-18-Pro-Max-1213.png",
-      "https://adminapi.applegadgetsbd.com/storage/media/medium/iPhone-18-Pro-Max-1213.png"
+      "https://adminapi.applegadgetsbd.com/storage/media/large/iPhone-18-Pro-Max-1213.png",
+      "https://adminapi.applegadgetsbd.com/storage/media/large/iPhone-18-Pro-Max1-4009.png",
+      "https://adminapi.applegadgetsbd.com/storage/media/large/iPhone-18-Pro-Max4-9025.png",
+      "https://adminapi.applegadgetsbd.com/storage/media/large/iPhone-18-Pro-Max3-6632.png"
     ],
     "colors": [
       {
-        "name": "Default",
-        "hex": "#1e293b"
+        "name": "Burgundy",
+        "hex": "#552940"
+      },
+      {
+        "name": "Black",
+        "hex": "#212121"
+      },
+      {
+        "name": "Glacier",
+        "hex": "#6790C0"
       },
       {
         "name": "Silver",
-        "hex": "#e2e8f0"
-      },
-      {
-        "name": "Dark Titanium",
-        "hex": "#334155"
+        "hex": "#D8D8D8"
       }
     ],
     "storages": [
       {
-        "label": "128GB",
-        "price": 207999,
+        "label": "256GB",
+        "price": 206999,
         "regularPrice": 212000
       },
       {
-        "label": "256GB",
-        "price": 216999,
-        "regularPrice": 221000
+        "label": "512GB",
+        "price": 224999,
+        "regularPrice": 230000
       },
       {
-        "label": "512GB",
-        "price": 229999,
-        "regularPrice": 234000
+        "label": "1TB",
+        "price": 249999,
+        "regularPrice": 255000
+      },
+      {
+        "label": "2TB",
+        "price": 289999,
+        "regularPrice": 295000
       }
     ],
     "regions": [
-      "Physical Dual SIM",
-      "eSIM + SIM",
-      "Global Official"
+      "Dual eSIM",
+      "Physical SIM + eSIM",
+      "Dual Physical SIM"
     ],
     "specs": {
-      "display": "6.7-inch Super Retina XDR OLED / AMOLED 120Hz",
-      "processor": "Apple A18 / A19 Pro Bionic",
-      "camera": "50MP + 48MP + 12MP Ultra-wide, 4K 120fps Dolby Vision",
-      "battery": "5000 mAh Li-Po, 45W Fast Charging",
-      "os": "iOS 18 / 19",
-      "network": "5G, 4G LTE, Wi-Fi 7, Bluetooth 5.4, NFC",
-      "waterproof": "IP68 Dust/Water Resistant (up to 6m for 30 mins)"
+      "display": "6.9 inches LTPO Super Retina XDR OLED, 120Hz, HDR10, Dolby Vision, 1320 × 2868 pixels",
+      "processor": "Apple A20 Pro (2nm), Hexa-core, Apple 7-core GPU, Dual 16-core Neural Engine",
+      "camera": "48MP Wide Fusion Variable Aperture + 48MP Periscope Telephoto + 48MP Ultra Wide | 4K@120fps Dolby Vision",
+      "battery": "Typical use: Up to 30 hours | Video playback: Up to 45 hours | 60W Fast Charging",
+      "os": "iOS 27 with Apple Intelligence and Siri AI",
+      "network": "GSM, HSPA, LTE, 5G, Wi-Fi 7, Bluetooth 6.0, NFC",
+      "waterproof": "Ceramic Shield 2, IP68 Water Resistance (up to 6m for 30 mins)"
     },
-    "overview": "Get the authentic iPhone 18 Pro Max at the best price in Bangladesh from Apple Gadgets BD. Includes official service warranty, genuine replacement guarantee, and 0% EMI payment options."
+    "overview": "Experience Apple's most advanced iPhone with the iPhone 18 Pro Max, where breakthrough technology meets premium design. Its stunning 6.9-inch Super Retina XDR OLED display with 120Hz delivers incredibly smooth, vibrant visuals, while the powerful A20 Pro 2nm chip ensures lightning-fast performance."
   },
   {
     "id": "iphone-18-pro",
